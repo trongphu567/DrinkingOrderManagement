@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import React, {Component} from 'react';
 import {drinks, sidesDishes} from './data';
 import './App.css';
+import OrderList from './components/OrderList';
+import OrderDialog from './components/OrderDialog';
 
 // function App() {
 //   return (
@@ -51,7 +53,7 @@ class App extends Component {
     addOrderItem = () => {
         const newOrder = {
             id: Date.now(),
-            date: new Date().toLocaleDateString(),
+            date: new Date().toLocaleDateString('en-GB'),
             items: []
         };
         // cap nhat trang thai de hien thi dialog la them do uong
@@ -106,8 +108,28 @@ class App extends Component {
         const {orders, currentOrder, isDialogOpen} = this.state;
         return (
             <div className="App">
-                <h1>Quản lý đơn hàng</h1>
+                <h1>Quản lý đơn hàng bán thức uống đơn giản</h1>
                 <button onClick={this.addOrderItem}>Thêm đơn hàng</button>
+
+                {/* goi component OrderList va truyen props vao */}
+                <OrderList
+                    orders={orders}
+                    onEdit={this.editOrderItem}
+                    onDelete={this.deleteOrderItem}
+                />
+
+                {/* hien thi dialog khi them hoac chinh sua do uong */}
+                {
+                    isDialogOpen && (
+                        <OrderDialog
+                            order={currentOrder}
+                            onSave={this.saveOrder}
+                            onClose={() => this.setState({isDialogOpen: false})}
+                            drinks={drinks}
+                            sidesDishes={sidesDishes}
+                        />
+                    )
+                }
                 
             </div>
             
