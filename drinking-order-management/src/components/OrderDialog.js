@@ -83,6 +83,7 @@ class OrderDialog extends Component {
                   </option>
                 ))}
               </select>
+              {/* input so luong */}
               <input
                 type="number"
                 value={order.quantity}
@@ -93,9 +94,14 @@ class OrderDialog extends Component {
               <span style={{margin: '30px'}}>Giá: {order.price} VND</span>
             </div>
               ))}
+
+              {/* hai button them do uong hoac mon phu */}
               <button style={{margin: '10px'}} onClick={() => this.handleAddItem('drink')}>Thêm thức uống</button>
               <button onClick={() => this.handleAddItem('sideDish')}>Thêm món phụ</button>
+
               <p>Tổng tiền: {totalPrice} VND</p>
+
+              {/* button luu don hang va dong dialog */}
               <button style={{margin: '10px'}} onClick={this.handleSave}>Lưu đơn hàng</button>
               <button onClick={onClose}>Đóng</button>
             </div>
